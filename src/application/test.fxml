@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #3e3f39;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: white; -fx-text-fill: white;">
+        <menus>
+          <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleGenerateDataMenuItem" text="Generate new input points" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowGeneratedData" text="Show generated data" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit" visible="false">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+                  <MenuItem mnemonicParsing="false" text="Instructions" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="33.0" layoutY="44.0" prefHeight="35.0" prefWidth="504.0" text="In our program you can see how different algorithms works on same data" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="94.0" prefHeight="44.0" prefWidth="168.0" text="Choose algorithm:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="ChoiceBox" layoutX="33.0" layoutY="149.0" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: white;" value="Genetic Algorithm">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Genetic Algorithm" />
+                  <String fx:value="Nearest Neighbour Algorithm" />
+                  <String fx:value="Greedy Algorithm" />
+              </FXCollections>
+          </items>
+      </ChoiceBox>
+     <Button fx:id="submitButton" layoutX="33.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleSubmitButtonClick" prefHeight="52.0" prefWidth="150.0" style="-fx-background-color: white;" text="Let's go !" />
+   </children>
+</AnchorPane>
