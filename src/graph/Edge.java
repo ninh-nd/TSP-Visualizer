@@ -21,6 +21,15 @@ public class Edge {
 		this.weight = v.calcWeight(u);
 		this.line = line;
 	}
+	public Edge(Node u, Node v) {
+		this.source = u;
+		this.target = v;
+		this.weight = v.calcWeight(u);
+	}
+	public double getWeight() {
+		return weight;
+	}
+
 	public Edge(Node u, Node v, double weight, Shape line) {
 		this.source = u;
 		this.target = v;

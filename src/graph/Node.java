@@ -4,18 +4,24 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 public class Node {
-	private Point2D name;
+	private int nodeID;
+	private static int count = 0;
 	private int x;
 	private int y;
-	private Circle circle;
+//	private Circle circle;
 	private boolean visited;
-	public Node(double x, double y) {
-		this.name = new Point2D(x, y);
-		this.circle = new Circle(x, y, 10);
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+//		this.circle = new Circle(x, y, 10);
+		this.nodeID = ++count;
 	}
 	public double calcWeight(Node start) {
 		double distance = Math.sqrt(Math.pow(this.x - start.getX(),2) + Math.pow(this.y - start.getY(),2));
-        return (int)Math.round(distance);
+        return distance;
+	}
+	public int getNodeID() {
+		return nodeID;
 	}
 	public int getX() {
 		return x;
@@ -23,5 +29,4 @@ public class Node {
 	public int getY() {
 		return y;
 	}
-	
 }
