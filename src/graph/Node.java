@@ -1,32 +1,44 @@
 package graph;
 
 import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
-public class Node {
+public class Node implements Display {
 	private int nodeID;
 	private static int count = 0;
-	private int x;
-	private int y;
+
+	
+    private final Point2D location;
+    private final Circle circle;
+    
 //	private Circle circle;
 	private boolean visited;
 	public Node(int x, int y) {
-		this.x = x;
-		this.y = y;
-//		this.circle = new Circle(x, y, 10);
 		this.nodeID = ++count;
+		this.location = new Point2D(x, y);
+        this.circle = new Circle(x, y, 5);
 	}
-	public double calcWeight(Node start) {
-		double distance = Math.sqrt(Math.pow(this.x - start.getX(),2) + Math.pow(this.y - start.getY(),2));
-        return distance;
-	}
+	
+    protected double getDistanceTo(Node node) {
+        return this.getLocation().distance(node.getLocation());
+    }
 	public int getNodeID() {
 		return nodeID;
 	}
-	public int getX() {
-		return x;
+
+	@Override
+	public void display(Pane root) {
+		// TODO Auto-generated method stub
+		 root.getChildren().add(this.circle);
 	}
-	public int getY() {
-		return y;
+	@Override
+	public void clear(Pane root) {
+		// TODO Auto-generated method stub
+		  root.getChildren().remove(this.circle);
 	}
+	
+    protected Point2D getLocation() {
+        return this.location;
+    }
 }

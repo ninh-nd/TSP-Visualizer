@@ -1,8 +1,12 @@
 package controller;
 
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import graph.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +14,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import saleman.model.City;
+import saleman.model.CityManager;
 
 public class Controller implements Initializable {
     @FXML
@@ -40,10 +46,20 @@ public class Controller implements Initializable {
     private ChoiceBox<String> chooseAlgo;
     
     private String[] algo = {"Naive", "Dynamic", "MST"};
+    
+    private ArrayList<Node> nodeList = new ArrayList<Node>();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		chooseAlgo.getItems().addAll(algo);
 	}
+	
+    root.setOnMouseClicked(e -> {
+        root.requestFocus();
+        Node node = new Node(e.getX(), e.getY());
+        node.display(root);
+        bottomLabel.setText("Total City: " + CityManager.getInstance().numberOfCities() + " | Minimum distance : | Time : ");
+    });
+
 }

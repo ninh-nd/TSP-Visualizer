@@ -18,13 +18,13 @@ public class Edge {
 	public Edge(Node u, Node v, Shape line) {
 		this.source = u;
 		this.target = v;
-		this.weight = v.calcWeight(u);
+		this.weight = v.getDistanceTo(u);
 		this.line = line;
 	}
 	public Edge(Node u, Node v) {
 		this.source = u;
 		this.target = v;
-		this.weight = v.calcWeight(u);
+		this.weight = v.getDistanceTo(u);
 	}
 	public double getWeight() {
 		return weight;
