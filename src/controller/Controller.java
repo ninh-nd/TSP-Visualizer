@@ -5,7 +5,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import algorithm.Naive;
+import graph.ManageNode;
 import graph.Node;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -45,8 +48,6 @@ public class Controller implements Initializable {
     private ChoiceBox<String> chooseAlgo;
     
     private String[] algo = {"Naive", "Dynamic", "MST"};
-    
-    private ArrayList<Node> nodeList = new ArrayList<Node>();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -57,9 +58,20 @@ public class Controller implements Initializable {
     @FXML
     public void getPoint(MouseEvent event) throws IOException {
     	Node node = new Node(event.getX(), event.getY());
-    	nodeList.add(node);
     	node.display(root);	
     }
 
-
+    @FXML
+    public void removePoint(ActionEvent event) {
+    	if (ManageNode.getInstance().numberOfNodes() > 0) {
+    		ManageNode.getInstance().clearOne(ManageNode.getInstance().numberOfNodes()-1, root);
+    	}
+    }
+    
+    @FXML
+    public void runAlgorithm(ActionEvent event) {
+    	if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
+    		Naive.run(root);
+    	}
+    }
 }

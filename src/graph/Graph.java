@@ -3,21 +3,19 @@ package graph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph {
+import javafx.scene.layout.Pane;
+
+public class Graph implements Display {
 
 	public static List<Node> nodeList = new ArrayList<Node>();
 	public static List<Edge> edgeList = new ArrayList<Edge>();
-
+	
 	public static void setNodeList(List<Node> nodeList) {
 		Graph.nodeList = nodeList;
 	}
 
 	public static void setEdgeList(List<Edge> edgeList) {
 		Graph.edgeList = edgeList;
-	}
-	
-	public void addEdge(Edge edge) {
-		edgeList.add(edge);
 	}
 
 	public List<Node> getNodeList() {
@@ -28,27 +26,37 @@ public class Graph {
 		return edgeList;
 	}
 
-	public void removeEdge(Edge edge) {
-		if (edgeList.contains(edge)) {
-			edgeList.remove(edge);
+	public static void addLine() {
+		for (int i = 0; i < nodeList.size(); i++) {
+			edgeList.add(new Edge(nodeList.get(i), nodeList.get((i + 1) % nodeList.size())));
 		}
 	}
 
-	public void addNode(Node node) {
-		nodeList.add(node);
-	}
-
-	public void removeNode(Node node) {
-		if (nodeList.contains(node)) {
-			for (Edge edge : edgeList) {
-				if (edge.getSource().equals(node) || edge.getTarget().equals(node))
-					edgeList.remove(edge);
-			}
-			nodeList.remove(node);
+	public Graph() {
+		for (int i = 0; i < ManageNode.getInstance().numberOfNodes(); i++) {
+			nodeList.set(i, ManageNode.getInstance().getNode(i));
 		}
 	}
 
-	public static void main(String[] args) {
-
+	@Override
+	public void display(Pane root) {
+		for (int i = 0; i < edgeList.size(); i++)
+			edgeList.get(i).display(root);
 	}
+
+	@Override
+	public void clear(Pane root) {
+		for (int i = 0; i < edgeList.size(); i++)
+			edgeList.get(i).clear(root);
+	}
+	
+	@Override
+	public String toString() {
+		String tmp = "";
+		for (int i = 0; i < nodeList.size(); i++) {
+			tmp += nodeList.get(i).toString();
+		}
+		return tmp;
+	}
+	//Con method printTourLine
 }

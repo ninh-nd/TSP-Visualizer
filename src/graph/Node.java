@@ -18,6 +18,7 @@ public class Node implements Display {
 		this.nodeID = ++count;
 		this.location = new Point2D(d, e);
         this.circle = new Circle(d, e, 5);
+        ManageNode.getInstance().addNode(this);
 	}
 	
     protected double getDistanceTo(Node node) {

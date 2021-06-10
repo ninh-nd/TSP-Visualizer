@@ -18,6 +18,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("GUI.fxml"));
 			Scene scene = new Scene(root,700,600);
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("TSP Visualizer");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
