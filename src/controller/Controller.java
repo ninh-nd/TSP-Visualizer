@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,8 +13,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import saleman.model.City;
-import saleman.model.CityManager;
+import javafx.scene.input.MouseEvent;
+
 
 public class Controller implements Initializable {
     @FXML
@@ -55,11 +54,12 @@ public class Controller implements Initializable {
 		chooseAlgo.getItems().addAll(algo);
 	}
 	
-    root.setOnMouseClicked(e -> {
-        root.requestFocus();
-        Node node = new Node(e.getX(), e.getY());
-        node.display(root);
-        bottomLabel.setText("Total City: " + CityManager.getInstance().numberOfCities() + " | Minimum distance : | Time : ");
-    });
+    @FXML
+    public void getPoint(MouseEvent event) throws IOException {
+    	Node node = new Node(event.getX(), event.getY());
+    	nodeList.add(node);
+    	node.display(root);	
+    }
+
 
 }

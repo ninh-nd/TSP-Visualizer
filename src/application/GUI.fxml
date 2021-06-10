@@ -12,7 +12,7 @@
       <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
    </padding>
    <left>
-      <Pane fx:id="root" prefHeight="572.0" prefWidth="499.0" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="root" onMouseClicked="#getPoint" prefHeight="572.0" prefWidth="499.0" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER" />
    </left>
    <right>
       <AnchorPane fx:id="subRoot" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">

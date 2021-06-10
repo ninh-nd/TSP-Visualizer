@@ -14,10 +14,10 @@ public class Node implements Display {
     
 //	private Circle circle;
 	private boolean visited;
-	public Node(int x, int y) {
+	public Node(double d, double e) {
 		this.nodeID = ++count;
-		this.location = new Point2D(x, y);
-        this.circle = new Circle(x, y, 5);
+		this.location = new Point2D(d, e);
+        this.circle = new Circle(d, e, 5);
 	}
 	
     protected double getDistanceTo(Node node) {
