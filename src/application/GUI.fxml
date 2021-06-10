@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<BorderPane fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller"> 
+   <padding>
+      <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+   </padding>
+   <left>
+      <Pane fx:id="root" prefHeight="572.0" prefWidth="499.0" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane fx:id="subRoot" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <RadioButton layoutX="44.0" layoutY="46.0" mnemonicParsing="false" text="Naiive" />
-            <RadioButton layoutX="45.0" layoutY="100.0" mnemonicParsing="false" text="Dynamic" />
-            <RadioButton layoutX="44.0" layoutY="153.0" mnemonicParsing="false" text="MST" />
-            <Button layoutX="106.0" layoutY="334.0" mnemonicParsing="false" text="Run" />
-            <Button layoutX="21.0" layoutY="334.0" mnemonicParsing="false" text="Clear" />
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-  </items>
-</SplitPane>
+            <Button fx:id="runBut" layoutX="59.0" layoutY="249.0" mnemonicParsing="false" text="Run" />
+            <Button fx:id="stepBut" layoutX="39.0" layoutY="302.0" mnemonicParsing="false" text="Run SBStep" />
+            <Button fx:id="clearBut" layoutX="45.0" layoutY="362.0" mnemonicParsing="false" text="Clear line" />
+            <Button fx:id="undoBut" layoutX="54.0" layoutY="416.0" mnemonicParsing="false" text="Undo" />
+            <Button fx:id="resetBut" layoutX="55.0" layoutY="470.0" mnemonicParsing="false" text="Reset" />
+            <ChoiceBox fx:id="chooseAlgo" layoutX="11.0" layoutY="117.0" prefWidth="150.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
