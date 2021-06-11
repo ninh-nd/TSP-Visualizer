@@ -8,10 +8,10 @@ import javafx.scene.layout.Pane;
 
 public class Graph implements Display {
 
-	private List<Node> nodeList = new ArrayList<Node>();
+	private List<MyNode> nodeList = new ArrayList<MyNode>();
 	private List<Edge> edgeList = new ArrayList<Edge>();
 	
-	public void setNodeList(List<Node> nodeList) {
+	public void setNodeList(List<MyNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 
@@ -19,7 +19,7 @@ public class Graph implements Display {
 		this.edgeList = edgeList;
 	}
 
-	public List<Node> getNodeList() {
+	public List<MyNode> getNodeList() {
 		return nodeList;
 	}
 
@@ -38,7 +38,7 @@ public class Graph implements Display {
 			nodeList.set(i, ManageNode.getInstance().getNode(i));
 		}
 	}
-	public Graph(ArrayList<Node> nodeList) {
+	public Graph(ArrayList<MyNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 	@Override

@@ -6,19 +6,19 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
 public class Edge implements Display {
-	private Node source, target;
+	private MyNode source, target;
 	private double weight;
 	private Line line;
 	
-	public Node getSource() {
+	public MyNode getSource() {
 		return source;
 	}
 
-	public Node getTarget() {
+	public MyNode getTarget() {
 		return target;
 	}
 
-	public Edge(Node u, Node v) {
+	public Edge(MyNode u, MyNode v) {
 		this.source = u;
 		this.target = v;
 		this.weight = v.getDistanceTo(u);

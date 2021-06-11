@@ -8,13 +8,13 @@ import javafx.scene.layout.Pane;
 public class ManageNode {
 	private static final ManageNode instance = new ManageNode();
 	
-	private ArrayList<Node> nodeList;
+	private ArrayList<MyNode> nodeList;
 	
 	public static ManageNode getInstance() {
 		return instance;
 	}
 
-	public ArrayList<Node> getNodeList() {
+	public ArrayList<MyNode> getNodeList() {
 		return nodeList;
 	}
 
@@ -22,11 +22,11 @@ public class ManageNode {
 		this.nodeList = new ArrayList<>();
 	}
 
-	public void addNode(Node node) {
-		this.nodeList.add(node);
+	public void addNode(MyNode myNode) {
+		this.nodeList.add(myNode);
 	}
 
-	public Node getNode(int index) {
+	public MyNode getNode(int index) {
 		return this.nodeList.get(index);
 	}
 
