@@ -13,9 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 
 public class Controller implements Initializable {
@@ -73,18 +75,32 @@ public class Controller implements Initializable {
 			Naive.run(root);
 		}
 	}
+
+	@FXML
+	void reset(ActionEvent event) {
+		reset(root);
+	}
+
+	@FXML
+	void runInStep(ActionEvent event) {
+		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
+			Naive.runInStep(root);
+		}
+	}
+
     @FXML
-    void reset(ActionEvent event) {
-    	reset(root);
-    }
+    public static Text text;
+
 	public static void clearLine(Pane root) {
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line"));
 	}
+
 	public static void reset(Pane root) {
-		MyNode.setCount(0); //Reset nodeID
+		MyNode.setCount(0); // Reset nodeID
 		clearLine(root);
 		ManageNode.getInstance().clearAll();
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line")
 				|| t.getClass().getSimpleName().equals("Circle"));
+		Naive.setIndex(-1);
 	}
 }

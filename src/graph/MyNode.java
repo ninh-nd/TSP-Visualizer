@@ -23,7 +23,7 @@ public class MyNode implements Display {
 	}
 
 	protected double getDistanceTo(MyNode myNode) {
-		return this.getLocation().distance(myNode.getLocation());
+		return Math.round(this.getLocation().distance(myNode.getLocation()));
 	}
 
 	public int getNodeID() {

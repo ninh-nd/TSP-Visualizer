@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import controller.Controller;
 import graph.Edge;
 import graph.Graph;
 import graph.ManageNode;
 import graph.MyNode;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 public class Naive {
 	private static ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 	private static ArrayList<Graph> allGraph = new ArrayList<Graph>();
 	private static ArrayList<Double> weightList = new ArrayList<Double>();
 	private static ArrayList<Integer> numberList = new ArrayList<Integer>();
+	private static int index = -1;
+	private static int shortestGraphIndex;
 	public Naive() {
 		
 	}
@@ -74,6 +78,7 @@ public class Naive {
 		for (int i = 0; i < weightList.size(); i++) {
 			if (weightList.get(i) == smallestWeight()) {
 				index = i;
+				shortestGraphIndex = i;
 				break;
 			}
 		}
@@ -106,14 +111,6 @@ public class Naive {
 			numberList.add(nodeList.get(i).getNodeID());
 		}
 	}
-
-//	public void run(Pane root) {
-//		long start = System.nanoTime();
-//		this.clearLine(root);
-//		this.distance = smallestWeight();
-//		this.timeElapsed = System.nanoTime() - start;
-//		this.displayLine(root, this.shortestPath);
-//	}
 	
 	public static void run(Pane root) {
 		result.clear();
@@ -129,17 +126,44 @@ public class Naive {
 		System.out.println("According weight: " + weightList);
 		System.out.println();
 		getAllGraph(result, completeGraph);
-		ArrayList<MyNode> optimizedNodeList = shortestPath(shortestPathInArray(), completeGraph);
-		Graph optimizedGraph = new Graph(optimizedNodeList);
 		for (Graph graph: allGraph) {
+			Controller.clearLine(root);
 			displayLine(root, graph);
 		}
-		displayLine(root, optimizedGraph);
-//		text.setText("Shortest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray());
+		System.out.println("Shortest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray());
+	}
+	
+	public static void runInStep(Pane root) {
+		index++;
+		result.clear();
+		allGraph.clear();
+		weightList.clear();
+		numberList.clear();
+		Graph completeGraph = new Graph(ManageNode.getInstance().getNodeList());
+		completeGraph.addLine(completeGraph);
+		fillNumberList(completeGraph.getNodeList());
+		getAllPath(numberList);
+		System.out.println("Current permutation: " + result.get(index));
+		fillWeightList(result, completeGraph);
+		System.out.println("According weight: " + weightList.get(index));
+		getAllGraph(result, completeGraph);
+		if (index < allGraph.size()-1) {
+			Controller.clearLine(root);
+			displayLine(root, allGraph.get(index));
+		}
+		else {
+			Controller.clearLine(root);
+			displayLine(root, allGraph.get(shortestGraphIndex));
+			System.out.println("Shortest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray());
+		}
 	}
 
-	private static void displayLine(Pane root, Graph shortestPath) {
-		shortestPath.addLine(shortestPath);
-		shortestPath.display(root);
+	public static void setIndex(int index) {
+		Naive.index = index;
+	}
+
+	private static void displayLine(Pane root, Graph graph) {
+		graph.addLine(graph);
+		graph.display(root);
 	}
 }
