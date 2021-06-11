@@ -58,7 +58,7 @@ public class Controller implements Initializable {
     @FXML
     public void getPoint(MouseEvent event) throws IOException {
     	Node node = new Node(event.getX(), event.getY());
-    	node.display(root);	
+    	node.display(root);
     }
 
     @FXML

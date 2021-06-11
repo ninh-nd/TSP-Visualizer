@@ -16,7 +16,6 @@ public class Naive {
 	private static ArrayList<Integer> numberList = new ArrayList<Integer>();
 	private Graph shortestPath = null;
 	private double distance;
-	private long timeElapsed = 0;
 	public Naive() {
 		
 	}
@@ -49,12 +48,12 @@ public class Naive {
 		numberList.set(to, tmp);
 	}
 
-	private static void fillWeightList(ArrayList<ArrayList<Integer>> result) {
+	private static void fillWeightList(ArrayList<ArrayList<Integer>> result, Graph graph) {
 		for (int i = 0; i < result.size(); i++) {
 			double sum = 0;
 			ArrayList<Integer> currentPerm = result.get(i);
 			for (int j = 0; j < currentPerm.size() - 1; j++) {
-				for (Edge edge : Graph.edgeList) {
+				for (Edge edge : graph.getEdgeList()) {
 					if ((edge.getSource().getNodeID() == currentPerm.get(j)
 							&& edge.getTarget().getNodeID() == currentPerm.get(j + 1))
 							|| (edge.getSource().getNodeID() == currentPerm.get(j + 1)
@@ -71,7 +70,7 @@ public class Naive {
 		return Collections.min(weightList);
 	}
 
-	private static ArrayList<Integer> shortestPath() {
+	private static ArrayList<Integer> shortestPathInArray() {
 		int index = 0;
 		for (int i = 0; i < weightList.size(); i++) {
 			if (weightList.get(i) == smallestWeight()) {
@@ -80,6 +79,16 @@ public class Naive {
 			}
 		}
 		return result.get(index);
+	}
+	
+	private static ArrayList<Node> shortestPath(ArrayList<Integer> shortestPathArray, Graph graph) {
+		ArrayList<Node> nodeList = new ArrayList<Node>();
+		for (int i=0; i< shortestPathArray.size(); i++) {
+			for (int j=0; j< graph.getNodeList().size(); j++) {
+				if (graph.getNodeList().get(j).getNodeID() == shortestPathArray.get(i)) nodeList.add(graph.getNodeList().get(j));
+			}
+		}
+		return nodeList;
 	}
 
 	private static void fillNumberList(List<Node> nodeList) {
@@ -97,26 +106,25 @@ public class Naive {
 //	}
 	
 	public static void run(Pane root) {
-		Graph.setNodeList(ManageNode.getInstance().getNodeList());
-		Graph.addLine();
-		Graph graph = new Graph();
-		fillNumberList(Graph.nodeList);
+		Graph graph = new Graph(ManageNode.getInstance().getNodeList());
+		graph.addLine(graph);
+		fillNumberList(graph.getNodeList());
 		getAllPath(numberList);
 		System.out.println("All permutation: " + result);
-		fillWeightList(result);
+		fillWeightList(result, graph);
 		System.out.println("According weight: " + weightList);
-		System.out.println("Shortest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPath());
+		System.out.println("Shortest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray());
+		ArrayList<Node> optimizedNodeList = shortestPath(shortestPathInArray(), graph);
+		Graph optimizedGraph = new Graph(optimizedNodeList);
+		displayLine(root, optimizedGraph);
 	}
 
-	private void displayLine(Pane root, Graph shortestPath) {
-		shortestPath.addLine();
+	private static void displayLine(Pane root, Graph shortestPath) {
+		shortestPath.addLine(shortestPath);
 		shortestPath.display(root);
 	}
 
 //	public void clearLine(Pane root) {
 //		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line"));
 //	}
-	public long getTimeElapsed() {
-		return this.timeElapsed / 1000000000;
-	}
 }

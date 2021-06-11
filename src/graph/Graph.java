@@ -2,20 +2,21 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javafx.scene.layout.Pane;
 
 public class Graph implements Display {
 
-	public static List<Node> nodeList = new ArrayList<Node>();
-	public static List<Edge> edgeList = new ArrayList<Edge>();
+	private List<Node> nodeList = new ArrayList<Node>();
+	private List<Edge> edgeList = new ArrayList<Edge>();
 	
-	public static void setNodeList(List<Node> nodeList) {
-		Graph.nodeList = nodeList;
+	public void setNodeList(List<Node> nodeList) {
+		this.nodeList = nodeList;
 	}
 
-	public static void setEdgeList(List<Edge> edgeList) {
-		Graph.edgeList = edgeList;
+	public void setEdgeList(List<Edge> edgeList) {
+		this.edgeList = edgeList;
 	}
 
 	public List<Node> getNodeList() {
@@ -26,9 +27,9 @@ public class Graph implements Display {
 		return edgeList;
 	}
 
-	public static void addLine() {
-		for (int i = 0; i < nodeList.size(); i++) {
-			edgeList.add(new Edge(nodeList.get(i), nodeList.get((i + 1) % nodeList.size())));
+	public void addLine(Graph graph) { 
+		for (int i = 0; i < graph.nodeList.size(); i++) {
+			graph.edgeList.add(new Edge(graph.nodeList.get(i), graph.nodeList.get((i + 1) % graph.nodeList.size())));
 		}
 	}
 
@@ -37,13 +38,15 @@ public class Graph implements Display {
 			nodeList.set(i, ManageNode.getInstance().getNode(i));
 		}
 	}
-
+	public Graph(ArrayList<Node> nodeList) {
+		this.nodeList = nodeList;
+	}
 	@Override
 	public void display(Pane root) {
-		for (int i = 0; i < edgeList.size(); i++)
+		for (int i = 0; i < edgeList.size(); i++) {
 			edgeList.get(i).display(root);
 	}
-
+	}
 	@Override
 	public void clear(Pane root) {
 		for (int i = 0; i < edgeList.size(); i++)
