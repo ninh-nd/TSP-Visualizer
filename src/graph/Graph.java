@@ -2,7 +2,6 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javafx.scene.layout.Pane;
 
@@ -10,7 +9,16 @@ public class Graph implements Display {
 
 	private List<MyNode> nodeList = new ArrayList<MyNode>();
 	private List<Edge> edgeList = new ArrayList<Edge>();
-	
+	public static void setUpDefaultGraph(Pane root) {
+		MyNode node1 = new MyNode(50, 312);
+		MyNode node2 = new MyNode(221, 154);
+		MyNode node3 = new MyNode(395, 311);
+		MyNode node4 = new MyNode(195, 462);
+		node1.display(root);
+		node2.display(root);
+		node3.display(root);
+		node4.display(root);
+	}
 	public void setNodeList(List<MyNode> nodeList) {
 		this.nodeList = nodeList;
 	}

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import algorithm.Naive;
+import graph.Graph;
 import graph.ManageNode;
 import graph.MyNode;
 import javafx.event.ActionEvent;
@@ -72,7 +73,11 @@ public class Controller implements Initializable {
 	@FXML
 	public void runAlgorithm(ActionEvent event) {
 		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
-			Naive.run(root);
+			if (ManageNode.getInstance().getNodeList().isEmpty()) {
+				Graph.setUpDefaultGraph(root);
+				Naive.run(root);
+			}
+			else Naive.run(root);
 		}
 	}
 
@@ -84,7 +89,11 @@ public class Controller implements Initializable {
 	@FXML
 	void runInStep(ActionEvent event) {
 		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
-			Naive.runInStep(root);
+			if (ManageNode.getInstance().getNodeList().isEmpty()) {
+				Graph.setUpDefaultGraph(root);
+				Naive.runInStep(root);
+			}
+			else Naive.runInStep(root);
 		}
 	}
 
@@ -94,6 +103,11 @@ public class Controller implements Initializable {
 	public static void clearLine(Pane root) {
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line"));
 	}
+	
+    @FXML
+    void clearLine(ActionEvent event) {
+    	clearLine(root);
+    }
 
 	public static void reset(Pane root) {
 		MyNode.setCount(0); // Reset nodeID

@@ -41,7 +41,7 @@ public class MyNode implements Display {
 		root.getChildren().remove(this.circle);
 	}
 
-	protected Point2D getLocation() {
+	public Point2D getLocation() {
 		return this.location;
 	}
 
