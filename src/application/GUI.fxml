@@ -21,7 +21,7 @@
          <children>
             <Button fx:id="runBut" layoutX="34.0" layoutY="249.0" mnemonicParsing="false" onAction="#runAlgorithm" prefHeight="25.0" prefWidth="108.0" text="Run" />
             <Button fx:id="stepBut" layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#runInStep" text="Run step-by-step" />
-            <Button fx:id="clearBut" layoutX="34.0" layoutY="362.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Clear line" />
+            <Button fx:id="clearBut" layoutX="34.0" layoutY="362.0" mnemonicParsing="false" onAction="#clearLine" prefHeight="25.0" prefWidth="108.0" text="Clear line" />
             <Button fx:id="undoBut" layoutX="34.0" layoutY="416.0" mnemonicParsing="false" onAction="#removePoint" prefHeight="25.0" prefWidth="108.0" text="Undo" />
             <Button fx:id="resetBut" layoutX="34.0" layoutY="469.0" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="108.0" text="Reset" />
             <ChoiceBox fx:id="chooseAlgo" layoutX="13.0" layoutY="119.0" prefWidth="150.0" />

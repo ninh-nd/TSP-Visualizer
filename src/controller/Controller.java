@@ -94,6 +94,11 @@ public class Controller implements Initializable {
 	public static void clearLine(Pane root) {
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line"));
 	}
+	
+    @FXML
+    void clearLine(ActionEvent event) {
+    	clearLine(root);
+    }
 
 	public static void reset(Pane root) {
 		MyNode.setCount(0); // Reset nodeID
