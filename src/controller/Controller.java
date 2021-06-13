@@ -20,6 +20,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 
+import algorithm.MST;
+import algorithm.runMST;
+
 public class Controller implements Initializable {
 	@FXML
 	private BorderPane mainRoot;
@@ -73,6 +76,10 @@ public class Controller implements Initializable {
 	public void runAlgorithm(ActionEvent event) {
 		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
 			Naive.run(root);
+		}
+		
+		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[2]) {
+			runMST.run(root);
 		}
 	}
 

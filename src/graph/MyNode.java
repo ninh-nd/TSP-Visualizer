@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -22,7 +24,7 @@ public class MyNode implements Display {
 		ManageNode.getInstance().addNode(this);
 	}
 
-	protected double getDistanceTo(MyNode myNode) {
+	public double getDistanceTo(MyNode myNode) {
 		return Math.round(this.getLocation().distance(myNode.getLocation()));
 	}
 
@@ -44,5 +46,50 @@ public class MyNode implements Display {
 	protected Point2D getLocation() {
 		return this.location;
 	}
+	
+	
+	//for MST
+	private boolean visited = false;
+    private Edge shortestEdge;
+    private ArrayList<MyNode> children = new ArrayList<MyNode>();
+    
+    public void addChild(MyNode child)
+    {
+        this.children.add(child);
+    }
 
+    public void setShortestEdge(MyNode c)
+    {
+        this.shortestEdge = new Edge(this, c);
+    }
+
+    public void setShortestEdge(MyNode c, double len)
+    {
+        this.shortestEdge = new Edge(this, c, len);
+    }
+
+    public void setVisited(boolean v)
+    {
+        this.visited = v;
+    }
+
+    public ArrayList<MyNode> getChildren()
+    {
+        return this.children;
+    }
+
+    public double getPriority()
+    {
+        return this.shortestEdge.getWeight();
+    }
+
+    public Edge getShortestEdge()
+    {
+        return this.shortestEdge;
+    }
+
+    public boolean visited()
+    {
+        return this.visited;
+    }
 }
