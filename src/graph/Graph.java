@@ -9,7 +9,16 @@ public class Graph implements Display {
 
 	private List<MyNode> nodeList = new ArrayList<MyNode>();
 	private List<Edge> edgeList = new ArrayList<Edge>();
-	
+	public static void setUpDefaultGraph(Pane root) {
+		MyNode node1 = new MyNode(50, 312);
+		MyNode node2 = new MyNode(221, 154);
+		MyNode node3 = new MyNode(395, 311);
+		MyNode node4 = new MyNode(195, 462);
+		node1.display(root);
+		node2.display(root);
+		node3.display(root);
+		node4.display(root);
+	}
 	public void setNodeList(List<MyNode> nodeList) {
 		this.nodeList = nodeList;
 	}
@@ -31,7 +40,25 @@ public class Graph implements Display {
 			graph.edgeList.add(new Edge(graph.nodeList.get(i), graph.nodeList.get((i + 1) % graph.nodeList.size())));
 		}
 	}
-
+	
+	public MyNode getNode(int NodeId) {
+		for(MyNode n:nodeList)
+			if(n.getNodeID()==NodeId)
+				return n;
+		return null;
+	}
+	
+	public void getAllEdges() {
+		List<Edge> newEdgeList = new ArrayList<Edge>();
+		int n = getNodeList().size();
+		for(int i=1;i<=n;i++)
+			for(int j=i+1;j<=n;j++) {
+				Edge e = new Edge(getNode(i),getNode(j));
+				newEdgeList.add(e);
+			}
+		setEdgeList(newEdgeList);
+	}
+	
 	public Graph() {
 		for (int i = 0; i < ManageNode.getInstance().numberOfNodes(); i++) {
 			nodeList.set(i, ManageNode.getInstance().getNode(i));
