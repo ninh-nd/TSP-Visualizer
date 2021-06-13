@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import controller.Controller;
 import graph.Graph;
@@ -13,7 +14,8 @@ import javafx.scene.layout.Pane;
 import graph.Edge;
 
 public class DP {
-	private final int N, start;
+	private final int N;
+	private final int start;
 	  private static double[][] distance;
 	  private List<Integer> tour = new ArrayList<>();
 	  private double minTourCost = Double.POSITIVE_INFINITY;
@@ -26,7 +28,7 @@ public class DP {
 	  public DP(int start, double[][] distance) {
 	    N = distance.length;
 
-	    if (N <= 2) throw new IllegalStateException("N <= 2 not yet supported.");
+	    if (N < 2) throw new IllegalStateException("N < 2 not yet supported.");
 	    if (N != distance[0].length) throw new IllegalStateException("Matrix must be square (n x n)");
 	    if (start < 0 || start >= N) throw new IllegalArgumentException("Invalid startMyNode.");
 	    if (N > 32)
@@ -158,20 +160,93 @@ public class DP {
 			graph.display(root);
 		}
 	  
-	  static void combinationUtil(int arr[], int data[], int start,
-              int end, int index, Graph graph) {
-		  if (index == 2)
-	        {
-	            Edge e = new Edge(graph.getNode(data[0]),graph.getNode(data[1]));
-	            graph.getEdgeList().add(e);
-	            return;
-	        }
-		  for (int i=start; i<=end && end-i+1 >= 2-index; i++)
-	        {
-	            data[index] = arr[i];
-	            combinationUtil(arr, data, i+1, end, index+1, graph);
-	        }
-	    }
+//	  public void solveinstep(Pane root, Graph graph) {
+//
+//		    if (ranSolver) return;
+//
+//		    final int END_STATE = (1 << N) - 1;
+//		    Double[][] memo = new Double[N][1 << N];
+//		    ArrayList<MyNode> tempList = new ArrayList<MyNode>();
+//
+//
+//		    for (int end = 0; end < N; end++) {
+//		      if (end == start) continue;
+//		      memo[end][(1 << start) | (1 << end)] = distance[start][end];
+//		    }
+//
+//		    for (int r = 3; r <= N; r++) {
+//		      for (int subset : combinations(r, N)) {
+//		        if (notIn(start, subset)) continue;
+//		        for (int next = 0; next < N; next++) {
+//		          if (next == start || notIn(next, subset)) continue;
+//		          int subsetWithoutNext = subset ^ (1 << next);
+//		          double minDist = Double.POSITIVE_INFINITY;
+//		          for (int end = 0; end < N; end++) {
+//		            if (end == start || end == next || notIn(end, subset)) continue;
+//		            double newDistance = memo[end][subsetWithoutNext] + distance[end][next];
+//		            if (newDistance < minDist) {
+//		              minDist = newDistance;
+//		            }
+//		          }
+//		          memo[next][subset] = minDist;
+//		        }
+//		      }
+//		    }
+//
+//		    for (int i = 0; i < N; i++) {
+//		      if (i == start) continue;
+//		      double tourCost = memo[i][END_STATE] + distance[i][start];
+//		      if (tourCost < minTourCost) {
+//		        minTourCost = tourCost;
+//		      }
+//		    }
+//
+//		    int lastIndex = start;
+//		    int state = END_STATE;
+//		    tour.add(start+1);
+//		    tempList.add(graph.getNode(start+1));
+//		    
+//		    for (int i = 1; i < N; i++) {
+//
+//		      int bestIndex = -1;
+//		      double bestDist = Double.POSITIVE_INFINITY;
+//		      for (int j = 0; j < N; j++) {
+//		        if (j == start || notIn(j, state)) continue;
+//		        double newDist = memo[j][state] + distance[j][lastIndex];
+//		        if (newDist < bestDist) {
+//		          bestIndex = j;
+//		          bestDist = newDist;
+//		        }
+//		      }
+//		      
+//		      tour.add(bestIndex+1);
+//		      state = state ^ (1 << bestIndex);
+//		      lastIndex = bestIndex;
+//		      tempList.add(graph.getNode(bestIndex+1));
+//		      Graph tempgraph = new Graph(tempList);
+//		      tempgraph.addLine(tempgraph);
+//		      for(MyNode node:tempgraph.getNodeList()) System.out.print(node.getNodeID()+" ");
+//		      System.out.println();
+//		      for(Edge e:tempgraph.getEdgeList()) {
+//		    	  System.out.print(e.getSource().getNodeID()+" - "+e.getTarget().getNodeID()+" ");
+//		      }System.out.println();
+//		      Controller.clearLine(root);
+//		      displayLine(root, tempgraph);
+//		      long starttime=System.currentTimeMillis(),sleeptime=0;
+//		      while(sleeptime<3000) {
+//		    	  long currenttime=System.currentTimeMillis();
+//		    	  sleeptime=currenttime-starttime;
+//		      }
+//		    }
+//
+//		    tour.add(start+1);
+//		    Collections.reverse(tour);
+//		    tempList.add(graph.getNode(start+1));
+//		    Graph tempgraph = new Graph(tempList);
+//		    Controller.clearLine(root);
+//		    displayLine(root, tempgraph);
+//		    ranSolver = true;
+//		  }
 	  
 	  public static void run(Pane root) {
 		  long startTime = System.currentTimeMillis();
@@ -202,4 +277,17 @@ public class DP {
 		  long totalTime = endTime - startTime;
 		  System.out.println("Algorithm's run time: "+totalTime+"ms");
 	  }
+	  
+//	  public static void runInStep(Pane root) {
+//		  Graph graph = new Graph(ManageNode.getInstance().getNodeList());
+//		  int n = graph.getNodeList().size();
+//		  graph.getAllEdges();
+//		  double[][] distanceMatrix = new double[n][n];
+//		  distanceMatrix = getMatrix(graph, distanceMatrix);
+//		  int start = 0;
+//		  DP solver = new DP(start, distanceMatrix);
+//		  solver.solveinstep(root, graph);
+//		  System.out.println("Tour: " + solver.getTour());
+//		  System.out.println("Tour cost: " + solver.getTourCost());
+//	  }
 }
