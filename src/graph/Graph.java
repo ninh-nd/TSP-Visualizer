@@ -40,6 +40,25 @@ public class Graph implements Display {
 			graph.edgeList.add(new Edge(graph.nodeList.get(i), graph.nodeList.get((i + 1) % graph.nodeList.size())));
 		}
 	}
+	
+	public MyNode getNode(int NodeId) {
+		for(MyNode n:nodeList)
+			if(n.getNodeID()==NodeId)
+				return n;
+		return null;
+	}
+	
+	public void getAllEdges() {
+		List<Edge> newEdgeList = new ArrayList<Edge>();
+		int n = getNodeList().size();
+		for(int i=1;i<=n;i++)
+			for(int j=i+1;j<=n;j++) {
+				Edge e = new Edge(getNode(i),getNode(j));
+				newEdgeList.add(e);
+			}
+		setEdgeList(newEdgeList);
+	}
+	
 	public Graph() {
 		for (int i = 0; i < ManageNode.getInstance().numberOfNodes(); i++) {
 			nodeList.set(i, ManageNode.getInstance().getNode(i));

@@ -24,6 +24,12 @@ public class Edge implements Display {
 		this.weight = v.getDistanceTo(u);
 		this.line = newLine();
 	}
+	
+	public Edge(MyNode u, MyNode v, double weight) {
+		this.source = u;
+		this.target = v;
+		this.weight = weight;
+	}
 	private Line newLine() {
 		Line newLine = new Line();
 		Color defaultColor = Color.CYAN;
