@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller"> 
    <padding>
@@ -29,7 +28,4 @@
          </children>
       </AnchorPane>
    </right>
-   <bottom>
-      <Text fx:id="text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-   </bottom>
 </BorderPane>

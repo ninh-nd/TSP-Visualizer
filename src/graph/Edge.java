@@ -32,8 +32,8 @@ public class Edge implements Display {
 	}
 	private Line newLine() {
 		Line newLine = new Line();
-		Color defaultColor = Color.CYAN;
-		int defaultWidth = 3;
+		Color defaultColor = Color.BLACK;
+		int defaultWidth = 2;
 		newLine.setStartX(this.source.getLocation().getX());
 		newLine.setStartY(this.source.getLocation().getY());
 		newLine.setEndX(this.target.getLocation().getX());

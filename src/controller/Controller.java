@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import algorithm.DP;
 import algorithm.Naive;
+import algorithm.runMST;
 import graph.Graph;
 import graph.ManageNode;
 import graph.MyNode;
@@ -16,14 +17,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.scene.input.MouseEvent;
-
-import algorithm.MST;
-import algorithm.runMST;
 
 public class Controller implements Initializable {
 	@FXML
@@ -53,6 +50,8 @@ public class Controller implements Initializable {
 	@FXML
 	private ChoiceBox<String> chooseAlgo;
 
+	@FXML
+
 	private String[] algo = { "Naive", "Dynamic", "MST" };
 
 	@Override
@@ -80,17 +79,16 @@ public class Controller implements Initializable {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
 				Naive.run(root);
-			}
-			else Naive.run(root);
-		}
-		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
+			} else
+				Naive.run(root);
+		} else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
 				DP.run(root);
-			}
-			else DP.run(root);
+			} else
+				DP.run(root);
 		}
-		
+
 		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[2]) {
 			runMST.run(root);
 		}
@@ -107,8 +105,8 @@ public class Controller implements Initializable {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
 				Naive.runInStep(root);
-			}
-			else Naive.runInStep(root);
+			} else
+				Naive.runInStep(root);
 		}
 //		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
 //			if (ManageNode.getInstance().getNodeList().isEmpty()) {
@@ -124,24 +122,28 @@ public class Controller implements Initializable {
 //		}
 	}
 
-    @FXML
-    public static Text text;
-
 	public static void clearLine(Pane root) {
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line"));
 	}
-	
-    @FXML
-    void clearLine(ActionEvent event) {
-    	clearLine(root);
-    }
+
+	@FXML
+	void clearLine(ActionEvent event) {
+		clearLine(root);
+	}
 
 	public static void reset(Pane root) {
 		MyNode.setCount(0); // Reset nodeID
 		clearLine(root);
 		ManageNode.getInstance().clearAll();
 		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Line")
-				|| t.getClass().getSimpleName().equals("Circle"));
+				|| t.getClass().getSimpleName().equals("Circle") || t.getClass().getSimpleName().equals("Text")
+				|| t.getClass().getSimpleName().equals("Circle") || t.getClass().getSimpleName().equals("Label"));
 		Naive.setIndex(-1);
+	}
+
+	public static void printDescription(String title, Pane root) {
+		root.getChildren().removeIf((Node t) -> t.getClass().getSimpleName().equals("Label"));
+		Label label = new Label(title);
+		root.getChildren().add(label);
 	}
 }

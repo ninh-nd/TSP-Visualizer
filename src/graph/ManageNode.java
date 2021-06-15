@@ -37,6 +37,7 @@ public class ManageNode {
 	public void clearOne(int p, Pane root) {
 		this.nodeList.get(p).clear(root);
 		this.nodeList.remove(p);
+		MyNode.setCount(MyNode.getCount()-1);
 	}
 
 	public int numberOfNodes() {

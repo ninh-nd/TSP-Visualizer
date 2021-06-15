@@ -18,7 +18,6 @@ public class Naive {
 	private static ArrayList<Integer> numberList = new ArrayList<Integer>();
 	private static int index = -1;
 	private static int shortestGraphIndex;
-
 	public Naive() {
 
 	}
@@ -51,25 +50,18 @@ public class Naive {
 		numberList.set(from, numberList.get(to));
 		numberList.set(to, tmp);
 	}
-
-	private static void fillWeightList(ArrayList<ArrayList<Integer>> result, Graph graph) {
-		for (int i = 0; i < result.size(); i++) {
-			double sum = 0;
-			ArrayList<Integer> currentPerm = result.get(i);
-			for (int j = 0; j < currentPerm.size() - 1; j++) {
-				for (Edge edge : graph.getEdgeList()) {
-					if ((edge.getSource().getNodeID() == currentPerm.get(j)
-							&& edge.getTarget().getNodeID() == currentPerm.get(j + 1))
-							|| (edge.getSource().getNodeID() == currentPerm.get(j + 1)
-									&& edge.getTarget().getNodeID() == currentPerm.get(j)))
-						sum += edge.getWeight();
-				}
+	
+	private static void fillWeightList(ArrayList<Graph> allGraph) {
+		for (Graph graph: allGraph) {
+			double weight = 0;
+			graph.addLine(graph);
+			for (Edge edge: graph.getEdgeList()) {
+				weight += edge.getWeight();
 			}
-			weightList.add(sum);
-			sum = 0;
+			weightList.add(weight);
 		}
 	}
-
+	
 	private static double smallestWeight() {
 		return Collections.min(weightList);
 	}
@@ -106,8 +98,7 @@ public class Naive {
 		}
 	}
 
-	private static long initialize() {
-		long startTime = System.nanoTime();
+	private static void initialize() {
 		result.clear();
 		allGraph.clear();
 		weightList.clear();
@@ -116,31 +107,16 @@ public class Naive {
 		initialGraph.addLine(initialGraph);
 		fillNumberList(initialGraph.getNodeList());
 		getAllPath(numberList);
-		fillWeightList(result, initialGraph);
 		getAllGraph(result, initialGraph);
-		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime;
-		return totalTime;
+		fillWeightList(allGraph);
 	}
 
 	public static void run(Pane root) {
-		long totalTime = initialize();
-		System.out.println("All permutation: " + result);
-		System.out.println("According weight: " + weightList);
-		System.out.println("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray()); // Print
-																														// first
-																														// to
-																														// make
-																														// sure
-																														// that
-																														// shortestGraphIndex
-																														// is
-																														// set
-																														// by
-																														// the
-																														// shortestPathInArray
-																														// function
-		System.out.println("Total time to generate all graphs: " + totalTime/1000000 + "ms");
+		initialize();
+//		System.out.println("All permutation: " + result);
+//		System.out.println("According weight: " + weightList);
+//		System.out.println("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray()); 
+		Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray(), root);
 		Controller.clearLine(root);
 		displayLine(root, allGraph.get(shortestGraphIndex));
 	}
@@ -148,20 +124,16 @@ public class Naive {
 	public static void runInStep(Pane root) {
 		index++;
 		if (index == 0) {
-			long totalTime = initialize();
-			System.out.println("Total time to generate all graphs: " + totalTime/1000000 + "ms");
+			initialize();
 		}
-			
 		if (index < allGraph.size()) {
-			System.out.println("Current permutation: " + result.get(index));
-			System.out.println("According weight: " + weightList.get(index));
+			Controller.printDescription("Current permutation: " + result.get(index) + "-" + "Weight: " + weightList.get(index), root);
 			Controller.clearLine(root);
 			displayLine(root, allGraph.get(index));
 		} else if (index == allGraph.size()) { //Print out the shortest graph as the final step
+			Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray(), root);
 			Controller.clearLine(root);
 			displayLine(root, allGraph.get(shortestGraphIndex));
-			System.out.println(
-					"Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray());
 		}
 		// Pressing more will cause index to increase but nothing happens in the GUI
 	}
