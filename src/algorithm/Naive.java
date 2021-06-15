@@ -112,11 +112,14 @@ public class Naive {
 	}
 
 	public static void run(Pane root) {
+		long startTime = System.currentTimeMillis();
 		initialize();
 //		System.out.println("All permutation: " + result);
 //		System.out.println("According weight: " + weightList);
 //		System.out.println("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray()); 
-		Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray(), root);
+		long endTime   = System.currentTimeMillis();
+		long totalTime = endTime - startTime;
+		Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray() + "\n" + "Algorithm's run time: " + totalTime + "ms", root);
 		Controller.clearLine(root);
 		displayLine(root, allGraph.get(shortestGraphIndex));
 	}
@@ -131,9 +134,7 @@ public class Naive {
 			Controller.clearLine(root);
 			displayLine(root, allGraph.get(index));
 		} else if (index == allGraph.size()) { //Print out the shortest graph as the final step
-			Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray(), root);
-			Controller.clearLine(root);
-			displayLine(root, allGraph.get(shortestGraphIndex));
+			run(root);
 		}
 		// Pressing more will cause index to increase but nothing happens in the GUI
 	}
