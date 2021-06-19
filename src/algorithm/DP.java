@@ -195,7 +195,9 @@ public class DP {
 	  public static void runInStep(Pane root) {
 		  Graph graph = new Graph(ManageNode.getInstance().getNodeList());
 		  int n = graph.getNodeList().size();
-		  if(step<n) step++; else step =2;
+		  if(step<n) step++;
+		  else if (step==n) return;
+		  else step = 2;
 		  Graph subgraph = getSubgraph(step,graph);
 		  subgraph.getAllEdges();
 		  double[][] distanceMatrix = new double[step][step];
