@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import algorithm.DP;
 import algorithm.Naive;
-import algorithm.runMST;
+//import algorithm.runMST;
 import graph.Graph;
 import graph.ManageNode;
 import graph.MyNode;
@@ -90,7 +90,7 @@ public class Controller implements Initializable {
 		}
 
 		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[2]) {
-			runMST.run(root);
+//			runMST.run(root);
 		}
 	}
 
@@ -108,18 +108,13 @@ public class Controller implements Initializable {
 			} else
 				Naive.runInStep(root);
 		}
-//		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
-//			if (ManageNode.getInstance().getNodeList().isEmpty()) {
-//				Graph.setUpDefaultGraph(root);
-//				long starttime=System.currentTimeMillis(),sleeptime=0;
-//			      while(sleeptime<3000) {
-//			    	  long currenttime=System.currentTimeMillis();
-//			    	  sleeptime=currenttime-starttime;
-//			      }
-//				DP.runInStep(root);
-//			}
-//			else DP.runInStep(root);
-//		}
+		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
+			if (ManageNode.getInstance().getNodeList().isEmpty()) {
+				Graph.setUpDefaultGraph(root);
+				DP.runInStep(root);
+			}
+			else DP.runInStep(root);
+		}
 	}
 
 	public static void clearLine(Pane root) {

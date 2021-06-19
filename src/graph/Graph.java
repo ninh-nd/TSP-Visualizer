@@ -42,9 +42,9 @@ public class Graph implements Display {
 	}
 	
 	public MyNode getNode(int NodeId) {
-		for(MyNode n:nodeList)
-			if(n.getNodeID()==NodeId)
-				return n;
+			for(MyNode n:nodeList)
+				if(n.getNodeID()==NodeId)
+					return n;
 		return null;
 	}
 	
