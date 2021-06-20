@@ -21,6 +21,10 @@ public class DP implements Algorithm {
 	private double minTourCost = Double.POSITIVE_INFINITY;
 	private boolean ranSolver = false;
 	private static int step = 1;
+		
+	public static void setStep(int step) {
+		DP.step = step;
+	}
 
 	public DP(double[][] distance) {
 		this(0, distance);

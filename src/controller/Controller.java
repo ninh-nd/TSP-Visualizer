@@ -139,6 +139,7 @@ public class Controller implements Initializable {
 				|| t.getClass().getSimpleName().equals("Circle") || t.getClass().getSimpleName().equals("Text")
 				|| t.getClass().getSimpleName().equals("Circle") || t.getClass().getSimpleName().equals("Label"));
 		Naive.setIndex(-1);
+		DP.setStep(1);
 	}
 
 	public static void printDescription(String title, Pane root) {
