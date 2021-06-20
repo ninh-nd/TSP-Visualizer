@@ -11,7 +11,7 @@ import graph.ManageNode;
 import graph.MyNode;
 import javafx.scene.layout.Pane;
 
-public class Naive {
+public class Naive implements Algorithm {
 	private static ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 	private static ArrayList<Graph> allGraph = new ArrayList<Graph>();
 	private static ArrayList<Double> weightList = new ArrayList<Double>();
@@ -111,7 +111,7 @@ public class Naive {
 		fillWeightList(allGraph);
 	}
 
-	public static void run(Pane root) {
+	public void run(Pane root) {
 		long startTime = System.currentTimeMillis();
 		initialize();
 //		System.out.println("All permutation: " + result);
@@ -121,10 +121,10 @@ public class Naive {
 		long totalTime = endTime - startTime;
 		Controller.printDescription("Smallest weight: " + smallestWeight() + " - " + "Shortest path: " + shortestPathInArray() + "\n" + "Algorithm's run time: " + totalTime + "ms", root);
 		Controller.clearLine(root);
-		displayLine(root, allGraph.get(shortestGraphIndex));
+		Algorithm.displayLine(root, allGraph.get(shortestGraphIndex));
 	}
 
-	public static void runInStep(Pane root) {
+	public void runInStep(Pane root) {
 		index++;
 		if (index == 0) {
 			initialize();
@@ -132,7 +132,7 @@ public class Naive {
 		if (index < allGraph.size()) {
 			Controller.printDescription("Current permutation: " + result.get(index) + "-" + "Weight: " + weightList.get(index), root);
 			Controller.clearLine(root);
-			displayLine(root, allGraph.get(index));
+			Algorithm.displayLine(root, allGraph.get(index));
 		} else if (index == allGraph.size()) { //Print out the shortest graph as the final step
 			run(root);
 		}
@@ -143,8 +143,4 @@ public class Naive {
 		Naive.index = index;
 	}
 
-	private static void displayLine(Pane root, Graph graph) {
-		graph.addLine(graph);
-		graph.display(root);
-	}
 }

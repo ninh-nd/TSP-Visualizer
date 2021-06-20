@@ -79,23 +79,23 @@ public class Controller implements Initializable {
 		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
-				Naive.run(root);
+				new Naive().run(root);
 			} else
-				Naive.run(root);
+				new Naive().run(root);
 		} else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
-				DP.run(root);
+				new DP().run(root);
 			} else
-				DP.run(root);
+				new DP().run(root);
 		}
 
 		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[2]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
-				MST.runMST(root);
+				new MST().run(root);
 			} else
-				MST.runMST(root);
+				new MST().run(root);
 		}
 	}
 
@@ -109,16 +109,16 @@ public class Controller implements Initializable {
 		if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[0]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
-				Naive.runInStep(root);
+				new Naive().runInStep(root);
 			} else
-				Naive.runInStep(root);
+				new Naive().runInStep(root);
 		}
 		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[1]) {
 			if (ManageNode.getInstance().getNodeList().isEmpty()) {
 				Graph.setUpDefaultGraph(root);
-				DP.runInStep(root);
-			}
-			else DP.runInStep(root);
+				new DP().runInStep(root);
+			} 
+			else new DP().runInStep(root);
 		}
 	}
 
