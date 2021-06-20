@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import algorithm.DP;
+import algorithm.MST;
 import algorithm.Naive;
 //import algorithm.runMST;
 import graph.Graph;
@@ -90,7 +91,11 @@ public class Controller implements Initializable {
 		}
 
 		else if (chooseAlgo.getSelectionModel().getSelectedItem() == algo[2]) {
-//			runMST.run(root);
+			if (ManageNode.getInstance().getNodeList().isEmpty()) {
+				Graph.setUpDefaultGraph(root);
+				MST.runMST(root);
+			} else
+				MST.runMST(root);
 		}
 	}
 
